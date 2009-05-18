@@ -49,8 +49,8 @@ module WMI
           d.count # needed to check for errors.  Weird, but it works.
         rescue => error
           case error.to_s
-          when /Invalid class/i : raise InvalidClass
-          when /Invalid query/i : raise InvalidQuery
+          when /Invalid class/i then raise InvalidClass
+          when /Invalid query/i then raise InvalidQuery
           end
         end
         d.to_a
