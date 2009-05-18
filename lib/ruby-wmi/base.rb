@@ -30,8 +30,8 @@ module WMI
     b.SubclassesOf.map { |subclass| class_name = subclass.Path_.Class }
   end
 
-
   alias :subclasses_of :subclasses
+
 
   extend self
 
@@ -203,5 +203,10 @@ module WMI
 
   def const_missing(name)
     self.const_set(name, Class.new(self::Base))
+  end
+
+  # allow for "WMI.Win32_Disk" style access
+  def self.method_missing(m, *args)
+   eval("WMI::" + m)
   end
 end
